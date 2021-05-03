@@ -5,7 +5,6 @@ import {createMuiTheme} from "@material-ui/core";
 import {purple} from "@material-ui/core/colors";
 import {ThemeProvider} from '@material-ui/styles';
 
-import Header from "./components/Header/Header";
 import Catalog from "./components/Catalog/Сatalog";
 import ShoppingBasket from "./components/ShoppingBasket/ShoppingBasket";
 
