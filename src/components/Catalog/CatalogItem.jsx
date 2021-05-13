@@ -1,7 +1,7 @@
 import {Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography} from '@material-ui/core';
 import {AddCircle, RemoveCircle} from '@material-ui/icons';
 
-export default function CatalogItem({title, description, image, count, onAdd, onRemove}) {
+export default function CatalogItem({title, description, cost, image, count, onAdd, onRemove}) {
     return (
       <Card className='catalogItem' elevation={5}>
           <CardMedia
@@ -15,6 +15,9 @@ export default function CatalogItem({title, description, image, count, onAdd, on
               </Typography>
               <Typography variant='body2' color='textSecondary'>
                   {description}
+              </Typography>
+              <Typography className='cost' align='center' variant='h6'>
+                  {cost}
               </Typography>
           </CardContent>
           <CardActions>

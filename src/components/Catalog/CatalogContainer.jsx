@@ -1,7 +1,7 @@
 import React from 'react';
 import Catalog from './Сatalog.jsx';
 import {connect} from 'react-redux';
-import {addToBasketAC, removeFromBasketAC} from '../../redux/actions.js';
+import {addToBasketAC, removeFromBasketAC, setCatalogAC} from '../../redux/actions.js';
 
 const mapStateToProps = state => {
     return {
@@ -9,13 +9,16 @@ const mapStateToProps = state => {
         itemsBasket: state.catalogAndBasket.shoppingBasket.items,
     };
 };
-const mapDispatchToProps = dispatch => {
+let mapDispatchToProps = dispatch => {
     return {
         addToBasketAC: (itemId, title, cost, count) => {
             dispatch(addToBasketAC(itemId, title, cost, count));
         },
         removeFromBasketAC: (itemId, cost, count) => {
             dispatch(removeFromBasketAC(itemId, cost, count));
+        },
+        setCatalog: items => {
+            dispatch(setCatalogAC(items));
         },
     };
 };

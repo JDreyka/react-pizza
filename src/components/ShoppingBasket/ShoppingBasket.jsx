@@ -3,18 +3,24 @@ import {Button, Grid, Typography} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
 export default function ShoppingBasket(props) {
+    const arrangeInBasket = () => {
+        props.arrangeInBasketAC();
+    };
+
     return (
       <>
           <BasketTable items={props.items}/>
           <Typography paragraph align='right' variant='h6'>
               {`Итоговая стоимость: ${props.totalCost}р`}
           </Typography>
-          <BasketActions/>
+          <BasketActions {...props} onArrange={() => arrangeInBasket()}/>
       </>
     );
 }
 
-function BasketActions() {
+function BasketActions(props) {
+    const disabled = props.items.length === 0;
+
     return (
       <div className='basketActions'>
           <Grid
@@ -28,7 +34,9 @@ function BasketActions() {
                   </Link>
               </Grid>
               <Grid item>
-                  <Button variant='contained' color='primary' disabled>Оформить заказ</Button>
+                  <Button variant='contained' color='primary' id='placeAnOrder' onClick={props.onArrange}
+                          disabled={disabled}>Оформить
+                      заказ</Button>
               </Grid>
           </Grid>
       </div>

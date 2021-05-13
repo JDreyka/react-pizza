@@ -1,8 +1,9 @@
-import {ADD_TO_BASKET, REMOVE_FROM_BASKET} from './actions.js';
+import {ADD_TO_BASKET, ARRANGE_IN_BASKET, REMOVE_FROM_BASKET, SET_CATALOG} from './actions.js';
+import * as axios from 'axios';
 
 let initialState = {
     catalog: {
-        items: [
+        items: [/*
             {
                 id: 101,
                 category: 10,
@@ -67,7 +68,7 @@ let initialState = {
                 cost: 295,
                 image: 'http://pngimg.com/uploads/pizza/pizza_PNG44077.png',
             },
-        ],
+        */],
         categories: {
             10: 'Пицца',
             11: 'Другое',
@@ -77,6 +78,10 @@ let initialState = {
     shoppingBasket: {
         items: [],
         totalCost: 0,
+    },
+
+    arrange: {
+        items: [],
     },
 };
 
@@ -90,14 +95,24 @@ const catalogAndBasketReducer = (state = initialState, action) => {
                     id: action.id,
                     title: action.title,
                     cost: action.cost,
-                    count: + 1,
+                    count: +1,
                 };
                 stateCopy.shoppingBasket.items.push(newItemInBasket);
                 stateCopy.shoppingBasket.totalCost += action.cost;
+
+                const newItemArrange = {
+                    id: action.id,
+                    count: +1,
+                };
+                stateCopy.arrange.items.push(newItemArrange);
                 return stateCopy;
             }
             itemFromBasket.count += 1;
             stateCopy.shoppingBasket.totalCost += action.cost;
+
+            const itemFromArrange = stateCopy.arrange.items.find(i => i.id === action.id);
+            itemFromArrange.count += 1;
+
             return stateCopy;
         }
         case REMOVE_FROM_BASKET: {
@@ -111,6 +126,23 @@ const catalogAndBasketReducer = (state = initialState, action) => {
                         stateCopy.shoppingBasket.items = stateCopy.shoppingBasket.items.filter(i => i.id !== action.id);
                     }
                 }
+            }
+            return stateCopy;
+        }
+        case SET_CATALOG: {
+            const stateCopy = JSON.parse(JSON.stringify(state));
+            stateCopy.catalog.items.push(...action.items);
+            return stateCopy;
+        }
+        case ARRANGE_IN_BASKET: {
+            const stateCopy = JSON.parse(JSON.stringify(state));
+            const arrayArrange = stateCopy.arrange.items;
+            if (stateCopy.shoppingBasket !== undefined) {
+                axios.post('http://10.8.0.3/api/v1/Order/create',
+                  {
+                      items: arrayArrange,
+                  }).then(response => {
+                });
             }
             return stateCopy;
         }
