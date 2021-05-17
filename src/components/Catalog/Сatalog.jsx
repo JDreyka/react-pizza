@@ -1,18 +1,18 @@
-import React from 'react';
 import {Grid} from '@material-ui/core';
 import CatalogItem from './CatalogItem.jsx';
 
 const Catalog = props => {
-    const addToBasket = (itemId, title, cost, count) => {
-        props.addToBasketAC(itemId, title, cost, count);
+    const addToBasket = itemId => {
+        props.addToBasketAC(itemId);
     };
+
     const removeFromBasket = (itemId, cost, count) => {
         props.removeFromBasketAC(itemId, cost, count);
     };
 
     const getItemInfo = itemId => {
-        const itemInCatalog = props.itemsCatalog.find(i => i.id === itemId);
-        const itemInBasket = props.itemsBasket.find(i => i.id === itemId);
+        const itemInCatalog = props.catalogItems.find(i => i.id === itemId);
+        const itemInBasket = props.basketItems.find(i => i.id === itemId);
 
         return {
             title: itemInCatalog.title,
@@ -25,11 +25,11 @@ const Catalog = props => {
     return (
       <div>
           <Grid container spacing={5}>
-              {props.itemsCatalog.map(i =>
+              {props.catalogItems.map(i =>
                 <Grid item xs={3}>
                     <CatalogItem
                       {...getItemInfo(i.id)}
-                      onAdd={() => addToBasket(i.id, i.title, i.cost, i.count)}
+                      onAdd={() => addToBasket(i.id)}
                       onRemove={() => removeFromBasket(i.id, i.cost, i.count)}
                     />
                 </Grid>

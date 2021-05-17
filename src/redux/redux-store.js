@@ -1,9 +1,8 @@
 import {combineReducers, createStore} from 'redux';
-import catalogAndBasketReducer from './catalogAndBasketReducer.js';
+import basketReducer from './basketReducer.js';
 
 let reducers = combineReducers({
-    catalogAndBasket: catalogAndBasketReducer,
+    basketBox: basketReducer,
 });
 
-let store = createStore(reducers);
-export default store;
+export let store = createStore(reducers);
