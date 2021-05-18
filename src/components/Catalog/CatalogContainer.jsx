@@ -4,8 +4,8 @@ import {addToBasketAC, removeFromBasketAC} from '../../redux/actions.js';
 
 const mapStateToProps = state => {
     return {
-        catalogItems: state.basketBox.catalog.items,
-        basketItems: state.basketBox.shoppingBasket.items,
+        catalogItems: state.basket.catalog.items,
+        basketItems: state.basket.shoppingBasket.items,
     };
 };
 const mapDispatchToProps = dispatch => {
@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => {
         addToBasketAC: itemId => {
             dispatch(addToBasketAC(itemId));
         },
-        removeFromBasketAC: (itemId, cost, count) => {
-            dispatch(removeFromBasketAC(itemId, cost, count));
+        removeFromBasketAC: itemId => {
+            dispatch(removeFromBasketAC(itemId));
         },
     };
 };

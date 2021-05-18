@@ -6,8 +6,8 @@ const Catalog = props => {
         props.addToBasketAC(itemId);
     };
 
-    const removeFromBasket = (itemId, cost, count) => {
-        props.removeFromBasketAC(itemId, cost, count);
+    const removeFromBasket = itemId => {
+        props.removeFromBasketAC(itemId);
     };
 
     const getItemInfo = itemId => {
@@ -30,7 +30,7 @@ const Catalog = props => {
                     <CatalogItem
                       {...getItemInfo(i.id)}
                       onAdd={() => addToBasket(i.id)}
-                      onRemove={() => removeFromBasket(i.id, i.cost, i.count)}
+                      onRemove={() => removeFromBasket(i.id)}
                     />
                 </Grid>
               )}

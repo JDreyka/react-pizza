@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = state => {
     return {
-        items: state.basketBox.shoppingBasket.items,
-        totalCost: state.basketBox.shoppingBasket.totalCost,
+        items: state.basket.shoppingBasket.items,
+        totalCost: state.basket.shoppingBasket.totalCost,
     };
 };
 const mapDispatchToProps = () => {

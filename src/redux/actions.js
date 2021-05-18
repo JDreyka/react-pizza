@@ -7,9 +7,7 @@ export const addToBasketAC = itemId => ({
     type: ADD_TO_BASKET,
     id: itemId,
 });
-export const removeFromBasketAC = (itemId, cost, count) => ({
+export const removeFromBasketAC = itemId => ({
     type: REMOVE_FROM_BASKET,
     id: itemId,
-    cost: cost,
-    count: count,
 });

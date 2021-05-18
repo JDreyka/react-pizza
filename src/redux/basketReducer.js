@@ -26,8 +26,9 @@ const basketReducer = (state = initialState, action) => {
             const stateCopy = JSON.parse(JSON.stringify(state));
             const itemFromBasket = stateCopy.shoppingBasket.items.find(i => i.id === action.id);
             if (itemFromBasket !== undefined) {
+                const itemFromCatalog = stateCopy.catalog.items.find(i => i.id === action.id);
                 itemFromBasket.count -= 1;
-                stateCopy.shoppingBasket.totalCost -= action.cost;
+                stateCopy.shoppingBasket.totalCost -= itemFromCatalog.cost;
                 if (itemFromBasket.count === 0) {
                     stateCopy.shoppingBasket.items = stateCopy.shoppingBasket.items.filter(i => i.id !== action.id);
                 }
