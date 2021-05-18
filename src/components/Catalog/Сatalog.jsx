@@ -1,47 +1,42 @@
-import {Grid} from "@material-ui/core";
-import CatalogItem from "./CatalogItem";
+import {Grid} from '@material-ui/core';
+import CatalogItem from './CatalogItem.jsx';
 
-import {state} from "../../state";
+const Catalog = props => {
+    const addToBasket = itemId => {
+        props.addToBasketAC(itemId);
+    };
 
+    const removeFromBasket = itemId => {
+        props.removeFromBasketAC(itemId);
+    };
 
-export default function Catalog() {
-
-    const addToBasket = (itemId) => {
-        alert(`add item with id: ${itemId} to the basket`)
-    }
-
-    const removeFromBasket = (itemId) => {
-        alert(`remove item with id: ${itemId} from the basket`)
-    }
-
-    const getItemInfo = (itemId) => {
-
-        const itemInCatalog = state.catalog.items
-            .find(item => item.id === itemId);
-        const itemInBasket = state.shoppingBasket.items
-            .find(item => item.id === itemId);
+    const getItemInfo = itemId => {
+        const itemInCatalog = props.catalogItems.find(i => i.id === itemId);
+        const itemInBasket = props.basketItems.find(i => i.id === itemId);
 
         return {
             title: itemInCatalog.title,
             description: itemInCatalog.description,
             image: itemInCatalog.image,
             count: itemInBasket ? itemInBasket.count : 0,
-        }
-    }
+        };
+    };
 
     return (
-        <div>
-            <Grid container spacing={5}>
-                {state.catalog.items.map((item) =>
-                    <Grid item xs={3}>
-                        <CatalogItem
-                            {...getItemInfo(item.id)}
-                            onAdd={() => addToBasket(item.id)}
-                            onRemove={() => removeFromBasket(item.id)}
-                        />
-                    </Grid>
-                )}
-            </Grid>
-        </div>
-    )
-}
+      <div>
+          <Grid container spacing={5}>
+              {props.catalogItems.map(i =>
+                <Grid item xs={3}>
+                    <CatalogItem
+                      {...getItemInfo(i.id)}
+                      onAdd={() => addToBasket(i.id)}
+                      onRemove={() => removeFromBasket(i.id)}
+                    />
+                </Grid>
+              )}
+          </Grid>
+      </div>
+    );
+};
+
+export default Catalog;
