@@ -3,8 +3,6 @@ export const ARRANGE_IN_BASKET = 'ARRANGE_IN_BASKET';
 export const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET';
 export const SET_CATALOG = 'SET_CATALOG';
 
-/*---*/
-
 export const addToBasketAC = (itemId, title, cost, count) => ({
     type: ADD_TO_BASKET,
     id: itemId,

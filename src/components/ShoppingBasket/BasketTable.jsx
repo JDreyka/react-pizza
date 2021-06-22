@@ -12,8 +12,8 @@ export default function BasketTable(props) {
                   </TableRow>
               </TableHead>
               <TableBody>
-                  {props.items.map(i => (
-                    <ShoppingBasketRow {...i}/>
+                  {props.items.map(item => (
+                    <ShoppingBasketRow {...item}/>
                   ))}
               </TableBody>
           </Table>
